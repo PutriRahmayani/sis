@@ -41,7 +41,7 @@ class BeritaController extends Controller
     {
         $request->validate([
             'judul' => ['required', 'string', 'max:255'],
-            'isi' => ['required', 'string']
+            'isi' => ['required', 'string'],
         ]);
 
         Berita::create([
@@ -49,7 +49,7 @@ class BeritaController extends Controller
             'isi' => $request->isi,
         ]);
 
-        return redirect()->route('berita.index')->with('success', 'Berhasil Menambah Berita');
+        return redirect()->route('berita.index')->with('success', 'Berita Berhasil Ditambahkan');
     }
 
     /**
@@ -95,7 +95,7 @@ class BeritaController extends Controller
             'isi' => $request->isi,
         ]);
 
-        return redirect()->route('berita.index')->with('success', 'Berhasil Mengubah Berita');
+        return redirect()->route('berita.index')->with('success', 'Berita Berhasil Diperbarui');
     }
 
     /**
@@ -110,6 +110,6 @@ class BeritaController extends Controller
 
         $item->delete();
 
-        return redirect()->route('berita.index')->with('success', 'Berhasil Menghapus Berita');
+        return redirect()->route('berita.index')->with('success', 'Berita Berhasil Dihapus');
     }
 }

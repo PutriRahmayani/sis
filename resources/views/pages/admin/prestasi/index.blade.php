@@ -26,7 +26,9 @@
             </div>  --}}
             <div class="card-body">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-                    <a href="{{ route('prestasi.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
+                    {{-- <a href="{{ route('prestasi.create') }}" class="btn btn-primary mb-3">Tambah Data</a> --}}
+                    <a data-toggle="modal" data-target="modal-tambah-prestasi" class="btn btn-primary mb-3">Tambah Prestasi</a>
+                    @includeIf('pages.prestasi.create')
                 </div>
 
                 <div class="table-responsive">
@@ -43,7 +45,7 @@
                         </thead>
                         <tbody>
                             @forelse ($items as $item)
-                                <tr>
+                                {{-- <tr>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
                                     <td>{{ $item->prestasi }}</td>
@@ -64,9 +66,19 @@
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                    </td> --}}
+                                    <tr>
+                                    <td class="text-center">
+                                        <a data-toggle="modal" data-target="#modal-edit-prestasi{{ $item->id }}"
+                                            class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                        <a data-toggle="modal" data-target="#modal-hapus-berita{{ $item->id }}"
+                                            class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
+                                @includeIf('pages.prestasi.edit')
+                                @includeIf('pages.prestasi.destroy')
                                 @empty
+                                {{-- handle data empty --}}
                             @endforelse
 
                         </tbody>
@@ -78,3 +90,4 @@
     </div>
 <!-- /.container-fluid -->
 @endsection
+

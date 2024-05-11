@@ -31,7 +31,7 @@
                                             placeholder="Masukkan Isi Berita" required></textarea>
                                     </div>
                                     <hr>
-                                    <button type="submit" class="btn btn-primary btn-block my-3">Simpan</button>
+                                    <button type="submit" class="btn btn-primary btn-block my-3">Tambah</button>
                                 </form>
                             </div>
                         </div>
