@@ -13,7 +13,7 @@ class PrestasiController extends Controller
     public function index()
     {
         $items = Prestasi::orderBy('tanggal', 'DESC')->get();
-        return view('pages.admin.prestasi.index', [
+        return view('pages.prestasi.index', [
             'items' => $items
         ]);
     }
@@ -28,7 +28,7 @@ class PrestasiController extends Controller
 
     public function create()
     {
-        return view('pages.admin.prestasi.create');
+        //
     }
 
     public function store(Request $request)
@@ -39,13 +39,13 @@ class PrestasiController extends Controller
             'prestasi' => ['required', 'string', 'max:255'],
             'penyelenggara' => ['required', 'string', 'max:255'],
             'tingkat' => ['required', 'string', 'max:255'],
-            'bukti' => ['mimes:pdf', 'max:5124', 'required'],
+            'bukti' => ['mimes:png,jpg,jpeg,pdf', 'max:5124', 'required'],
         ]);
 
         $value = $request->file('bukti');
         $extension = $value->extension();
-        $fileNames = 'file' . uniqid('pdf_', microtime()) . '.' . $extension;
-        Storage::putFileAs('public/file-pdf', $value, $fileNames);
+        $fileNames = 'file' . uniqid('image_', microtime()) . '.' . $extension;
+        Storage::putFileAs('public/file-images', $value, $fileNames);
 
         Prestasi::create([
             'user_id' => Auth::user()->id,
@@ -59,6 +59,7 @@ class PrestasiController extends Controller
 
         return redirect()->route('prestasi.index')->with('success', 'Berhasil Menambah Prestasi');
     }
+
 
     public function store2(Request $request)
     {
@@ -102,7 +103,7 @@ class PrestasiController extends Controller
             $fileNames = $item->bukti;
         }
 
-        return view('pages.admin.prestasi.show', [
+        return view('pages.prestasi.show', [
             'item' => $item
         ]);
     }
@@ -110,11 +111,7 @@ class PrestasiController extends Controller
 
     public function edit($id)
     {
-        $item = Prestasi::findOrFail($id);
-
-        return view('pages.admin.prestasi.edit', [
-            'item' => $item
-        ]);
+        //
     }
 
     public function update(Request $request, $id)
@@ -207,14 +204,14 @@ class PrestasiController extends Controller
         // dd(["Tanggal Awal : ".$tglawal, "Tanggal Akhir : ".$tglakhir]);
         $cetak = Prestasi::whereBetween('tanggal', [$tglawal, $tglakhir])->latest()->get();
 
-        return view('pages.admin.prestasi.cetak', compact('cetak'));
+        return view('pages.prestasi.cetak', compact('cetak'));
     }
 
     public function laporan()
     {
         $items = Prestasi::orderBy('tanggal', 'DESC')->get();
 
-        return view('pages.admin.laporan.index', [
+        return view('pages.laporan.index', [
             'items' => $items
         ]);
     }

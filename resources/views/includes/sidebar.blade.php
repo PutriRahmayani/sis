@@ -54,9 +54,9 @@
             <i class="fas fa-fw fa-file"></i>
             <span>Cetak Laporan</span></a>-->
         </li>
-    @else
+    @elseif(Auth::user()->role == 'SISWA')
         <li class="nav-item @if (Route::is('prestasi.*')) active @endif">
-            <a class="nav-link" href="{{ route('prestasi.kelola') }}">
+            <a class="nav-link" href="{{ route('prestasi.index') }}">
                 <i class="fas fa-fw fa-trophy"></i>
                 <span>Data Prestasi</span></a>
         </li>
