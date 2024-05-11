@@ -16,7 +16,7 @@ class BeritaController extends Controller
     {
         $items = Berita::all();
 
-        return view('pages.admin.berita.index', [
+        return view('pages.berita.index', [
             'items' => $items
         ]);
     }
@@ -28,7 +28,7 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.berita.create');
+        //
     }
 
     /**
@@ -71,11 +71,7 @@ class BeritaController extends Controller
      */
     public function edit($id)
     {
-        $item = Berita::findOrFail($id);
-
-        return view('pages.admin.berita.edit', [
-            'item' => $item
-        ]);
+        //
     }
 
     /**

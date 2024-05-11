@@ -27,7 +27,7 @@ use App\Http\Controllers\DashboardController;
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['admin', 'auth'])
+Route::middleware(['auth', 'checkrole:ADMIN'])
 ->group(function() {
     Route::resource('prestasi', PrestasiController::class);
     Route::get('/prestasi/cetak/{tglawal}/{tglakhir}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');

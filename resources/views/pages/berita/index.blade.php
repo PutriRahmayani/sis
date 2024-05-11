@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Begin Page Content -->
+    <!-- Begin Page Content -->
     <div class="container-fluid">
 
-        @if(session()->has('success'))
+        @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Sukses!</strong> {{ session()->get('success') }}.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,7 +26,8 @@
             </div>  --}}
             <div class="card-body">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="{{ route('berita.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
+                    <a data-toggle="modal" data-target="#modal-tambah-berita" class="btn btn-primary mb-3">Tambah Berita</a>
+                    @includeIf('pages.berita.create')
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -43,22 +44,17 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->judul }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                            title="Edit Data">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </a>
-                                        <form action="{{ route('berita.destroy', $item->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <a data-toggle="modal" data-target="#modal-edit-berita{{ $item->id }}"
+                                            class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                        <a data-toggle="modal" data-target="#modal-hapus-berita{{ $item->id }}"
+                                            class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
-                                @empty
+                                @includeIf('pages.berita.edit')
+                                @includeIf('pages.berita.destroy')
+                            @empty
+                            {{-- Handle data empty --}}
                             @endforelse
-
                         </tbody>
                     </table>
                 </div>
@@ -66,5 +62,17 @@
         </div>
 
     </div>
-<!-- /.container-fluid -->
+    <!-- /.container-fluid -->
 @endsection
+
+@push('addon-script')
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Iterate over each textarea with class 'ckeditor' and initialize CKEditor
+            $('.ckeditor').each(function() {
+                CKEDITOR.replace($(this).attr('name'));
+            });
+        });
+    </script>
+@endpush
