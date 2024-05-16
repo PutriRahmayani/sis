@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 
 @section('content')
     @if (Auth::user()->role == 'SISWA')
@@ -305,4 +305,4 @@
             </div>
         </div>
     @endif
-@endsection
+@endsection --}}

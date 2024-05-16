@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" name="nama" id="nama"
-                            class="form-control @error('nama')  is-invalid  @enderror" placeholder="Masukkan Nama Siswa"
+                            class="form-control @error('nama')  is-invalid  @enderror" placeholder="Masukkan Nama Prestasi"
                             value="{{ old('nama') }}" required>
                         @error('nama')
                             <span class="invalid-feedback" role="alert">
@@ -64,8 +64,8 @@
                             <option value="Nasional" @if (old('tingkat') == 'Nasional') selected @endif>Nasional</option>
                             <option value="Internasional" @if (old('tingkat') == 'Internasional') selected @endif>
                                 Internasional</option>
-                            <option value="Sumatera" @if (old('tingkat') == 'Sumatera') selected @endif>Sumatera</option>
-                            <option value="Sumbagsel" @if (old('tingkat') == 'Sumbagsel') selected @endif>Sumbagsel
+                            {{-- <option value="Sumatera" @if (old('tingkat') == 'Sumatera') selected @endif>Sumatera</option>
+                            <option value="Sumbagsel" @if (old('tingkat') == 'Sumbagsel') selected @endif>Sumbagsel  --}}
                             </option>
                         </select>
                         @error('tingkat')
@@ -82,7 +82,7 @@
                                     class="form-control @error('bukti') is-invalid @enderror">
                             </div>
                         </div>
-                        <label class="small">* Maksimal ukuran pdf 5 MB</label>
+                        <label class="small">* Maksimal ukuran file 5 MB</label>
 
                         @error('bukti')
                             <span class="invalid-feedback" role="alert">
@@ -92,8 +92,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
             </div>
             </form>
         </div>

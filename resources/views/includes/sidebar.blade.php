@@ -28,39 +28,42 @@
     </div>
 
     @if (Auth::user()->role == 'ADMIN')
-        <!-- Nav Item - Tables -->
-        <li class="nav-item @if (Route::is('prestasi.*')) active @endif">
-            <a class="nav-link" href="{{ route('prestasi.index') }}">
-                <i class="fas fa-fw fa-trophy"></i>
-                <span>Prestasi</span></a>
-        </li>
-        <li class="nav-item @if (Route::is('berita.*')) active @endif">
-            <a class="nav-link" href="{{ route('berita.index') }}">
-                <i class="fas fa-fw fa-newspaper"></i>
-                <span>Berita</span></a>
-        </li>
-        <li class="nav-item @if (Route::is('siswa.*')) active @endif">
-            <a class="nav-link" href="{{ route('siswa.index') }}">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Siswa</span></a>
-        </li>
-        <li class="nav-item @if (Route::is('siswa.*')) active @endif">
-            <a class="nav-link" href="{{ route('siswa.index') }}">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Guru</span></a>
-        </li>
-        <!-- <li class="nav-item @if (Route::is('prestasis.laporan')) active @endif">
-        <a class="nav-link" href="{{ route('prestasis.laporan') }}">
-            <i class="fas fa-fw fa-file"></i>
-            <span>Cetak Laporan</span></a>-->
-        </li>
-    @elseif(Auth::user()->role == 'SISWA')
-        <li class="nav-item @if (Route::is('prestasi.*')) active @endif">
-            <a class="nav-link" href="{{ route('prestasi.index') }}">
-                <i class="fas fa-fw fa-trophy"></i>
-                <span>Data Prestasi</span></a>
-        </li>
-    @endif
+    <!-- Nav Item - Tables -->
+    <li class="nav-item @if (Route::is('prestasi.*')) active @endif">
+        <a class="nav-link" href="{{ route('prestasi.index') }}">
+            <i class="fas fa-fw fa-trophy"></i>
+            <span>Prestasi</span></a>
+    </li>
+    <li class="nav-item @if (Route::is('berita.*')) active @endif">
+        <a class="nav-link" href="{{ route('berita.index') }}">
+            <i class="fas fa-fw fa-newspaper"></i>
+            <span>Berita</span></a>
+    </li>
+    <li class="nav-item @if (Route::is('siswa.*')) active @endif">
+        <a class="nav-link" href="{{ route('siswa.index') }}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Siswa</span></a>
+    </li>
+    <li class="nav-item @if (Route::is('guru.*')) active @endif">
+        <a class="nav-link" href="{{ route('guru.index') }}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Guru</span></a>
+    </li>
+
+@elseif(Auth::user()->role == 'SISWA')
+    <li class="nav-item @if (Route::is('prestasi.*')) active @endif">
+        <a class="nav-link" href="{{ route('prestasi.index') }}">
+            <i class="fas fa-fw fa-trophy"></i>
+            <span>Prestasi</span></a>
+    </li>
+
+@elseif(Auth::user()->role == 'GURU')
+    <li class="nav-item @if (Route::is('prestasi.*')) active @endif">
+        <a class="nav-link" href="{{ route('prestasi.index') }}">
+            <i class="fas fa-fw fa-trophy"></i>
+            <span>Prestasi</span></a>
+    </li>
+@endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

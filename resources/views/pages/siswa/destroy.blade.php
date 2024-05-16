@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-hapus-berita{{ $item->id }}">
+{{-- <div class="modal fade" id="modal-hapus-siswa{{ $item->id }}">
     <div class="modal-dialog">
         <div class="modal-content bg-danger text-white">
             <div class="modal-header">
@@ -8,10 +8,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Anda Yakin Ingin Menghapus<b> {{ $item->judul }}</b>?</p>
+                <p>Anda Yakin Ingin Menghapus <b> {{ $item->judul }} </b>?</p>
             </div>
             <div class="modal-footer justify-content-center text-center">
-                <form action="{{ route('berita.destroy', $item->id) }}" method="POST">
+                <form action="{{ route('siswa.destroy', $item->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-light">HAPUS</button>
@@ -19,4 +19,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

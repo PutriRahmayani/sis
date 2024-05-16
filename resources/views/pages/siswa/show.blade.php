@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal-show-prestasi{{ $item->id }}">
+<div class="modal fade" id="modal-show-siswa{{ $item->id }}">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Bukti Prestasi</h1>
+                <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Data Siswa</h1>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,9 +13,7 @@
                         <div class="card card-primary">
                             <div class="card-body">
                                 <h3 class="text-center" style="color: black">{{ $item->nama }} </h3>
-                                <h4 class="text-center" style="color: black">{{ $item->prestasi }} </h4>
-                                <embed src="{{ asset('storage/app/public/file-images/' . $item->bukti) }}" width="100%"
-                                    height="1000" />
+                                <h4 class="text-center" style="color: black">{{ $item->email }} </h4>
                             </div>
                         </div>
                     </div>

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
-class SiswaController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $items = User::where('role', 'SISWA')->get();
+        $items = User::where('role', 'GURU')->get();
 
-        return view('pages.siswa.index', [
+        return view('pages.guru.index', [
             'items' => $items
         ]);
     }
@@ -31,7 +30,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('pages.siswa.create');
+        return view('pages.guru.create');
     }
 
     /**
@@ -42,21 +41,28 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'nama' => 'required|string|max:255',
-            'nipy' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|string|in:male,female',
-            'email' => 'required|string|email|max:255|unique:siswa',
-            'no_hp' => 'required|string|max:15',
+            'email' => 'required|string|max:255|email|unique:users',
+            'name' => 'required|string|max:255',
+            'nipy' => 'required|string|max:15',
+            'jenis_kelamin' => 'required|string|max:10',
+            'no_hp' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
 
-        Siswa::create($request->all());
+        User::create([
+            'name' => $request->name,
+            'role' => 'SISWA',
+            'nipy' => $request->nipy,
+            'jenis_kelamin' => $request->jk,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'password' => Hash::make($request->password)
+        ]);
 
-
-        return redirect()->route('siswa.index')->with('success', 'Siswa Berhasil Ditambahkan');
+        return redirect()->route('guru.index')->with('success', 'Guru Berhasil Ditambahkan');
     }
 
     /**
@@ -80,7 +86,7 @@ class SiswaController extends Controller
     {
         $item = User::findOrFail($id);
 
-        return view('pages.siswa.edit', [
+        return view('pages.guru.edit', [
             'item' => $item
         ]);
     }
@@ -96,7 +102,7 @@ class SiswaController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'nisn' => 'required|string|max:15',
+            'nipy' => 'required|string|max:15',
             'jenis_kelamin' => 'required|string|max:10',
             'no_hp' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
@@ -117,7 +123,7 @@ class SiswaController extends Controller
         }
 
         $user->name = $request->name;
-        $user->nisn = $request->nisn;
+        $user->nipy = $request->nipy;
         $user->jk = $request->jk;
         $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
@@ -127,7 +133,7 @@ class SiswaController extends Controller
         }
         $user->save();
 
-        return redirect()->route('siswa.index')->with('success', 'Siswa Berhasil Diperbarui');
+        return redirect()->route('guru.index')->with('success', 'Guru Berhasil Diperbarui');
     }
 
     /**
@@ -142,6 +148,6 @@ class SiswaController extends Controller
 
         $item->delete();
 
-        return redirect()->route('siswa.index')->with('success', 'Siswa Berhasil Dihapus');
+        return redirect()->route('guru.index')->with('success', 'Guru Berhasil Dihapus');
     }
 }

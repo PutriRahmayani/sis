@@ -7,6 +7,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuruController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +31,15 @@ use App\Http\Controllers\DashboardController;
 Route::middleware(['auth', 'checkrole:ADMIN,GURU,SISWA'])
 ->group(function() {
     Route::resource('prestasi', PrestasiController::class);
-    Route::get('/prestasi/cetak/{tglawal}/{tglakhir}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
+    // Route::get('/prestasi/cetak/{tglawal}/{tglakhir}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
 
-    Route::get('/cetak-laporan', [PrestasiController::class, 'laporan'])->name('prestasis.laporan');
+    // Route::get('/cetak-laporan', [PrestasiController::class, 'laporan'])->name('prestasis.laporan');
 
     Route::resource('berita', BeritaController::class);
 
     Route::resource('siswa', SiswaController::class);
+
+    Route::resource('guru', GuruController::class);
 });
 
 Route::middleware(['auth'])
@@ -49,11 +52,15 @@ Route::middleware(['auth'])
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
 
 
 require __DIR__.'/auth.php';
