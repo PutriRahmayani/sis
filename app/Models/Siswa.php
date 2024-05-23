@@ -12,11 +12,15 @@ class Siswa extends Model
     public $table = 'siswa';
 
     protected $fillable = [
-       'user_id','nama','nisn','jenis_kelamin','email','no_hp','alamat',
+       'user_id','nama','nisn','gender','email','no_hp','alamat',
     ];
-
+    
+    // public function user()
+    // {
+    //     return $this->hasOne(User::class, 'id', 'user_id');
+    // }
     public function user()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

@@ -92,7 +92,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="chart2022"></canvas>
+                        <canvas id="chart2024"></canvas>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="chart2021"></canvas>
+                        <canvas id="chart2023"></canvas>
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="chart2020"></canvas>
+                        <canvas id="chart2022"></canvas>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="chart2020"></canvas>
+                        <canvas id="chart2021"></canvas>
                     </div>
                 </div>
             </div>

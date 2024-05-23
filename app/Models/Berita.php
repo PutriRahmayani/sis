@@ -12,6 +12,6 @@ class Berita extends Model
     public $table = 'berita';
 
     protected $fillable = [
-        'judul', 'isi',
+        'judul', 'isi', 'thumbnail'
     ];
 }

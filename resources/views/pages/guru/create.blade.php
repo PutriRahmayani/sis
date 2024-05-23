@@ -31,8 +31,12 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for='gender'>Jenis Kelamin</label>
-                    <input class='form-control @error('gender') is-invalid @enderror' type='text' name='gender' id='gender' placeholder='Masukkan Jenis Kelamin' value='{{ old('gender') }}' />
+                    <label for="gender">Jenis Kelamin</label>
+                    <select name="gender" id="gender" class="form-control" required>
+                        <option value="">Pilih Gender</option>
+                        <option value="perempuan" @if (old('gender') == 'perempuan') selected @endif>Perempuan</option>
+                        <option value="laki-laki" @if (old('gender') == 'laki-laki') selected @endif>Laki-laki</option>
+                    </select>
                     @error('gender')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

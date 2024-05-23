@@ -1,47 +1,21 @@
-<div class="modal fade" id="modal-edit-guru{{ $item->id }}">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="modal-tambah-siswa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Guru</h4>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-body">
-            <form action="{{ route('guru.update', $item->id) }}" method="POST"
-                enctype="multipart/form-data">
+            <div class="modal-body">
+                <!-- Form untuk menambahkan data siswa -->
+            <form action="{{ route('akun.store') }}" method="POST">
                 @csrf
-                @method('PUT')
                 <div class="form-group">
                     <label for='name'>Nama</label>
                     <input class='form-control @error('name') is-invalid @enderror' type='text' name='name' id='name' placeholder='Masukkan Nama' value='{{ old('name') }}' />
                     @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for='nipy'>NIPY</label>
-                    <input class='form-control @error('nipy') is-invalid @enderror' type='text' name='nipy' id='nipy' placeholder='Masukkan NIPY' value='{{ old('nipy') }}' />
-                    @error('nipy')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="gender">Jenis Kelamin</label>
-                    <select name="gender" id="gender" class="form-control" required>
-                        <option value="">Pilih Gender</option>
-                        <option value="perempuan" @if (old('gender') == 'perempuan') selected @endif>Perempuan</option>
-                        <option value="laki-laki" @if (old('gender') == 'laki-laki') selected @endif>Laki-laki</option>
-                    </select>
-                    @error('gender')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -57,18 +31,14 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for='no_hp'>No HP</label>
-                    <input class='form-control @error('no_hp') is-invalid @enderror' type='text' name='no_hp' id='no_hp' placeholder='Masukkan No HP' value='{{ old('no_hp') }}' />
-                    @error('no_hp')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for='alamat'>Alamat</label>
-                    <input class='form-control @error('alamat') is-invalid @enderror' type='text' name='alamat' id='alamat' placeholder='Masukkan Alamat' value='{{ old('alamat') }}' />
-                    @error('alamat')
+                    <label for="role">Role</label>
+                    <select class="form-control @error('role') is-invalid @enderror" name="role" id="role">
+                        <option value="">Pilih Role</option>
+                        <option value="siswa" {{ old('role') == 'siswa' ? 'selected' : '' }}>Siswa</option>
+                        <option value="guru" {{ old('role') == 'guru' ? 'selected' : '' }}>Guru</option>
+                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                    </select>
+                    @error('role')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -92,9 +62,11 @@
                         </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+            </div>               
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
             </form>
         </div>
     </div>
-
 </div>

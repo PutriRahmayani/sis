@@ -13,10 +13,10 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        $item = User::findOrFail(Auth::user()->id);
+        $items = User::findOrFail(Auth::user()->id);
 
         return view('pages.admin.profile', [
-            'item' => $item
+            'items' => $items
         ]);
     }
 

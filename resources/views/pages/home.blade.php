@@ -36,16 +36,14 @@
             @else
             {{-- <a href="{{ route('login') }}" class="btn-get-started scrollto">LOGIN</a> --}}
             @endif
-          {{--  <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
         </div>
       </div>
-      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+      <div class="col-lg-6 order-1 order-lg-2 " data-aos="zoom-in" data-aos-delay="200">
         <img src="{{ url('frontend/assets/img/8601.png') }}" class="img-fluid animated" alt="">
       </div>
     </div>
   </div>
-
-</section><!-- End Hero -->
+</section>
 <main id="main">
 
     <!-- ======= About Us Section ======= -->
@@ -66,23 +64,62 @@
           <div class="col-lg-6 pt-4 pt-lg-0" style="text-align: justify">
             <p>
                <b> MISI : </b> <br>
-                1. Menyelenggarakan pendidikan yang menginternalisasikan nilai-nilai Islam, Ilmu Pengetahuan, Teknologi dan Wawasan Global <br>
-                2. Menerapkan kebijakan yang mengacu pada sistem manajemen mutu Sekolah Islam Terpadu (SIT) <br>
-                3. Membentuk peserta didik yang mampu membaca, menghafal, memahami, beribadah dan berakhlak sesuai Al-Qur'an dan As-Sunnah <br>
-                4. Membentuk peserta didik berkarakter pemimpin Islami dan memberikan manfaat untuk orang lain serta lingkungannya melalui penerapan Islamic Seven Habits <br>
+                1. Menyelenggarakan pendidikan yang menginternalisasikan nilai-nilai Islam, Ilmu Pengetahuan, dan Teknologi yang berwawasan Global <br>
+                2. Menerapkan kebijakan mutu yang mengacu pada sistem manajemen mutu Sekolah Islam Terpadu (SIT) <br>
+                3. Membentuk peserta didik yang mampu membaca, menghafal, serta memahami Al-Qur'an. Beribadah dan berakhlak sesuai dengan Al-Qur'an dan As-Sunnah <br>
+                4. Membentuk peserta didik berkarakter pemimpin Islami dan memberikan manfaat untuk orang lain serta lingkungannya melalui penerapan BPI dan Projek ProfilPelajar Pancasila (P5)<br>
                 5. Membekali peserta didik dengan life skill dan berwawasan global <br>
-                6. Menyelenggarakan sekolah berstandar Nasional yang mampu membentuk peserta didik yang kreatif, bekerja sama, komunikatif, kasih sayang, berpikir kritis dan logika komputasi <br>
+                6. Menyelenggarakan sekolah berstandar Nasional yang mampu membentuk peserta didik yang kreatif, kolaboratif, komunikatif, kasih sayang, berpikir kritis dan logika komputasi <br>
                 7. Menjadikan civitas academica sebagai perwujudan (role-model) dari sekolah Islam <br>
             </p>
-            {{--  <a href="#" class="btn-learn-more">Learn More</a>  --}}
           </div>
         </div>
-
       </div>
-    </section><!-- End About Us Section -->
+    </section>
+
+   
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Berita</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            @foreach ($berita as $item)
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in">
+                <div class="icon-box">
+                  <h4>{{ $item->judul }}</h4>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalberita{{ $item->id }}">
+                    Lihat Berita
+                  </button>
+                </div>
+              </div>
+            @endforeach
+        </div>
+      </div>
+    </section>
+    @foreach ($berita as $item2)
+    <div class="modal fade" id="modalberita{{ $item2->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">{{ $item2->judul }}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {!! $item2->isi !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+
 
     <!-- ======= Why Us Section ======= -->
-    <!-- <section id="why-us" class="why-us section-bg">
+    {{-- <section id="why-us" class="why-us section-bg">
       <div class="container-fluid" data-aos="fade-up">
 
         <div class="section-title">
@@ -110,20 +147,22 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Tanggal</th>
-                                <th>Prestasi</th>
+                                <th>Lomba</th>
                                 <th>Penyelenggara</th>
                                 <th>Tingkat</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($items as $prestasi)
                                 <tr style="color: #9B9CA9">
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $prestasi->nama }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($prestasi->tanggal)->translatedFormat('d F Y') }}</td>
-                                    <td>{{ $prestasi->prestasi }}</td>
-                                    <td>{{ $prestasi->penyelenggara }}</td>
-                                    <td>{{ $prestasi->tingkat }}</td>
+                                    <<td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ $item->lomba }}</td>
+                                    <td>{{ $item->penyelenggara }}</td>
+                                    <td>{{ $item->tingkat }}</td>
+                                    <td>{{ $item->keterangan }}</td>
                                 </tr>
                                 @empty
                             @endforelse
@@ -140,76 +179,8 @@
         </div>
 
       </div>
-    </section><!-- End Why Us Section -->-->
+    </section><!-- End Why Us Section -->--> --}}
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Berita</h2>
-          {{--  <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>  --}}
-        </div>
-
-        <div class="row justify-content-center">
-            @foreach ($berita as $item)
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in">
-                <div class="icon-box">
-                  <h4>{{ $item->judul }}</h4>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalberita{{ $item->id }}">
-                    Lihat Berita
-                  </button>
-                </div>
-              </div>
-            @endforeach
-
-
-          {{--  <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in">
-            <div class="icon-box">
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in">
-            <div class="icon-box">
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in">
-            <div class="icon-box">
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>  --}}
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    @foreach ($berita as $item2)
-    <div class="modal fade" id="modalberita{{ $item2->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">{{ $item2->judul }}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              {!! $item2->isi !!}
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    @endforeach
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -265,11 +236,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Silahkan login terlebih dahulu...
+            Silahkan melakukan Login terlebih dahulu
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-primary" href="{{ route('login') }}" >Login</a>
+            <a class="btn btn-primary" href="{{ route('login') }}">Login</a>
         </div>
         </div>
     </div>

@@ -26,7 +26,7 @@
         </div>  --}}
         <div class="card-body">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-                <a data-toggle="modal" data-target="#modal-tambah-guru" class="btn btn-primary mb-3">Tambah Guru</a>
+                {{-- <a data-toggle="modal" data-target="#modal-tambah-guru" class="btn btn-primary mb-3">Tambah Guru</a> --}}
                 @includeIf('pages.guru.create')
             </div>
             <div class="table-responsive">
@@ -47,7 +47,7 @@
                         @forelse ($items as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->nama }}</td>
                             <td>{{ $item->nipy }}</td>
                             <td>{{ $item->gender }}</td>
                             <td>{{ $item->email }}</td>
@@ -56,19 +56,24 @@
                             <td class="text-center">
                                 <a data-toggle="modal" data-target="#modal-show-guru{{ $item->id }}"
                                     class="btn btn-success"><i class='fas fa-eye'></i></a>
-                                <a data-toggle="modal" data-target="#modal-edit-guru{{ $item->id }}"
-                                    class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                {{-- <a data-toggle="modal" data-target="#modal-edit-guru{{ $item->id }}"
+                                    class="btn btn-primary"><i class="fas fa-pen"></i></a> --}}
                                 <a data-toggle="modal" data-target="#modal-hapus-guru{{ $item->id }}"
                                     class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         @includeIf('pages.guru.show')
                         @includeIf('pages.guru.edit')
+                        @includeIf('pages.guru.destroy')
+                        {{-- @includeIf('pages.guru.cetak') --}}
+                        {{-- @includeIf('pages.guru.edit') --}}
                         @empty
                         {{-- handle data empty --}}
                         @endforelse
                     </tbody>
                 </table>
+                <a data-toggle="modal" data-target="#modal-cetak-prestasi" class="btn btn-primary mb-3">
+                    <i class="fa fa-print d-block"></i>Cetak Data</a>
             </div>
         </div>
     </div>

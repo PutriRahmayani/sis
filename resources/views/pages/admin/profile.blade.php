@@ -17,15 +17,16 @@
                 @method('PATCH')
                 <div class="form-group">
                     <label for="name">Nama</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama..." value="{{ $item->name }}">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Nama" value="{{ $items->name }}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan Email..." value="{{ $item->email }}">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ $items->email }}">
                 </div>
+
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
-                    <input type="file" name="avatar" id="avatar" class="form-control" placeholder="Masukkan Avatar..." value="{{ $item->avatar }}">
+                    <input type="file" name="avatar" id="avatar" class="form-control" placeholder="Avatar" value="{{ $items->avatar }}">
                     <label class="small">* Maksimal ukuran png/jpg 1 MB</label>
                 </div>
                 <div class="form-group">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -17,7 +18,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $items = User::where('role', 'SISWA')->get();
+        $items = Siswa::all();
 
         return view('pages.siswa.index', [
             'items' => $items
@@ -31,40 +32,36 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('pages.siswa.create');
+        $user = Auth::user();
+        return view('pages.siswa.profile', compact('user'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // dd($request);
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'nama' => 'required|string|max:255',
-            'nipy' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|string|in:male,female',
-            'email' => 'required|string|email|max:255|unique:siswa',
-            'no_hp' => 'required|string|max:15',
-            'alamat' => 'required|string|max:255',
+            'nama' => 'required|string',
+            'nisn' => 'required|string',
+            'gender' => 'required|string',
+            'email' => 'required|email|unique:siswa,email',
+            'no_hp' => 'required|string',
+            'alamat' => 'required|string',
         ]);
+        $user = Auth::user();
+        // dd($user);
+        // Simpan data siswa ke dalam database dengan menggunakan user_id dari user yang sedang login
+        $siswa = new Siswa();
+        $siswa->user_id = $user->id;
+        $siswa->nama = $request->nama;
+        $siswa->nisn = $request->nisn;
+        $siswa->gender = $request->gender;
+        $siswa->email = $request->email;
+        $siswa->no_hp = $request->no_hp;
+        $siswa->alamat = $request->alamat;
+        $siswa->save();
 
-        Siswa::create($request->all());
-
-
-        return redirect()->route('siswa.index')->with('success', 'Siswa Berhasil Ditambahkan');
+        return redirect()->route('dashboard')->with('success', 'Profile berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
@@ -97,7 +94,8 @@ class SiswaController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'nisn' => 'required|string|max:15',
-            'jenis_kelamin' => 'required|string|max:10',
+            'gender' => 'required|string|max:10',
+            'email' => 'required|string|max:255|email|unique:users',
             'no_hp' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
         ]);
@@ -118,10 +116,10 @@ class SiswaController extends Controller
 
         $user->name = $request->name;
         $user->nisn = $request->nisn;
-        $user->jk = $request->jk;
+        $user->gender = $request->gender;
+        $user->email = $request->email;
         $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
-        $user->email = $request->email;
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }

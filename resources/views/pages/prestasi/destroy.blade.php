@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Anda Yakin Ingin Menghapus<b>{{ $item->Nama }} ?</b></p>
+                <p>Anda Yakin Ingin Menghapus<b> {{ $item->lomba }} ?</b></p>
             </div>
             <div class="modal-footer justify-content-center text-center">
                 <form action="{{ route('prestasi.destroy', $item->id) }}" method="POST">

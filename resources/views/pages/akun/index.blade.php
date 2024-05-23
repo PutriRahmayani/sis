@@ -14,14 +14,14 @@
     @endif
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-3 text-gray-800 font-weight-bold">Manajemen Siswa</h1>
+    <h1 class="h3 mb-3 text-gray-800 font-weight-bold">Manajemen User</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-                {{-- <a data-toggle="modal" data-target="#modal-tambah-siswa" class="btn btn-primary mb-3">Tambah Siswa</a> --}}
-                @includeIf('pages.siswa.create')
+                <a data-toggle="modal" data-target="#modal-tambah-siswa" class="btn btn-primary mb-3">Tambah User</a>
+                @includeIf('pages.akun.create')
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -29,11 +29,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>NISN</th>
-                            <th>Jenis Kelamin</th>
                             <th>Email</th>
-                            <th>No HP</th>
-                            <th>Alamat</th>
+                            <th>Role</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -41,21 +38,15 @@
                         @forelse ($items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->nisn }}</td>
-                                <td>{{ $item->gender }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{ $item->no_hp }}</td>
-                                <td>{{ $item->alamat }}</td>
+                                <td>{{ $item->role }}</td>
                                 <td class="text-center">
-                                    <a data-toggle="modal" data-target="#modal-show-siswa{{ $item->id }}" class="btn btn-success"><i class='fas fa-eye'></i></a>
-                                    {{-- <a data-toggle="modal" data-target="#modal-edit-siswa{{ $item->id }}" class="btn btn-primary"><i class="fas fa-pen"></i></a> --}}
-                                    <a data-toggle="modal" data-target="#modal-hapus-siswa{{ $item->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    <a data-toggle="modal" data-target="#modal-edit-akun{{ $item->id }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                    <a data-toggle="modal" data-target="#modal-hapus-akun{{ $item->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
-                            @includeIf('pages.siswa.show', ['item' => $item])
-                            {{-- @includeIf('pages.siswa.edit', ['item' => $item]) --}}
-                            {{-- @includeIf('pages.siswa.cetak', ['item' =. $item]) --}}
+                            @includeIf('pages.akun.edit', ['item' => $item])
                         @empty
                             <tr>
                                 <td colspan="8" class="text-center">Data tidak tersedia</td>
@@ -63,16 +54,14 @@
                         @endforelse
                     </tbody>
                 </table>
-                <a data-toggle="modal" data-target="#modal-cetak-prestasi" class="btn btn-primary mb-3">
-                    <i class="fa fa-print d-block"></i>Cetak Data</a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Hapus Siswa -->
+<!-- Modal Hapus Akun -->
 @foreach ($items as $item)
-<div class="modal fade" id="modal-hapus-siswa{{ $item->id }}">
+<div class="modal fade" id="modal-hapus-akun{{ $item->id }}">
     <div class="modal-dialog">
         <div class="modal-content bg-danger text-white">
             <div class="modal-header">
@@ -85,7 +74,7 @@
                 <p>Anda Yakin Ingin Menghapus <b>{{ $item->name }}</b>?</p>
             </div>
             <div class="modal-footer justify-content-center text-center">
-                <form action="{{ route('siswa.destroy', $item->id) }}" method="POST">
+                <form action="{{ route('akun.destroy', $item->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-light">HAPUS</button>

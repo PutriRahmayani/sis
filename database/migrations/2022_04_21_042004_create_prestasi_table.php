@@ -15,12 +15,14 @@ class CreatePrestasiTable extends Migration
     {
         Schema::create('prestasi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users'); 
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('nama');
             $table->date('tanggal');
-            $table->string('prestasi');
+            // $table->string('prestasi');
+            $table->string('lomba');
             $table->string('penyelenggara');
             $table->string('tingkat');
+            $table->string('keterangan');
             $table->string('bukti');
             $table->timestamps();
         });

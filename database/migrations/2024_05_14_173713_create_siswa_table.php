@@ -18,7 +18,7 @@ class CreateSiswaTable extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('nama');
             $table->string('nisn');
-            $table->string('gender');
+            $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->string('email')->unique();
             $table->string('no_hp');
             $table->string('alamat');

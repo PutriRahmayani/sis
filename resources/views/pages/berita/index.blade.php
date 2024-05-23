@@ -34,7 +34,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Thumbnail</th>
                                 <th>Judul</th>
+                                <th>Isi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -42,13 +44,19 @@
                             @forelse ($items as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        {{-- <img src="{{ storage::file-images/$item->thumbnail }}" alt="Thumbnail" style="width: 100px; height: auto;"> --}}
+                                        <img src="/images/{{$item->thumbnail }}" alt="Thumbnail" style="width: 100px; height: auto;">
+                                    </td>
                                     <td>{{ $item->judul }}</td>
+                                    <td>{{ $item->isi }}</td>
                                     <td class="text-center">
                                         <a data-toggle="modal" data-target="#modal-edit-berita{{ $item->id }}"
                                             class="btn btn-primary"><i class="fas fa-pen"></i></a>
                                         <a data-toggle="modal" data-target="#modal-hapus-berita{{ $item->id }}"
                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
+                                    
                                 </tr>
                                 @includeIf('pages.berita.edit')
                                 @includeIf('pages.berita.destroy')

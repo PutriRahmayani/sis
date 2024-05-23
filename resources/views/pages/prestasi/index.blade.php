@@ -37,9 +37,10 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Tanggal</th>
-                                <th>Prestasi</th>
+                                <th>Lomba</th>
                                 <th>Penyelenggara</th>
                                 <th>Tingkat</th>
+                                <th>Keterangan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -49,9 +50,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
-                                    <td>{{ $item->prestasi }}</td>
+                                    <td>{{ $item->lomba }}</td>
                                     <td>{{ $item->penyelenggara }}</td>
                                     <td>{{ $item->tingkat }}</td>
+                                    <td>{{ $item->keterangan }}</td>
                                     <td class="text-center">
                                         <a data-toggle="modal" data-target="#modal-show-prestasi{{ $item->id }}"
                                             class="btn btn-success"><i class='fas fa-eye'></i></a>
@@ -64,16 +66,47 @@
                                 @includeIf('pages.prestasi.show')
                                 @includeIf('pages.prestasi.edit')
                                 @includeIf('pages.prestasi.destroy')
+                                {{-- @includeIf('pages.prestasi.cetak') --}}
                             @empty
                                 {{-- handle data empty --}}
                             @endforelse
-
-                        </tbody>
-                    </table>
+                        </table>
+                        <button type="button" class="btn btn-primary m-2" id="cetakButton" data-toggle="modal" data-target="#cetakModal">
+                            <i class="fas fa-print"></i> Cetak Data
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-
-    </div>
-    <!-- /.container-fluid -->
-@endsection
+    
+        <!-- Modal Cetak -->
+        <div class="modal fade" id="cetakModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cetak Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('cetak') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label for="start_date">Start Date:</label>
+                                <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">End Date:</label>
+                                <input type="date" name="end_date" class="form-control" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Cetak</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
@@ -27,8 +28,9 @@ class BeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { //
+
+
     }
 
     /**
@@ -42,25 +44,42 @@ class BeritaController extends Controller
         $request->validate([
             'judul' => ['required', 'string', 'max:255'],
             'isi' => ['required', 'string'],
+            'thumbnail' => ['nullable', 'mimes:png,jpg,jpeg,pdf', 'max:5124']
         ]);
+
+        $fileNames = null;
+        if ($request->hasFile('thumbnail')) {
+            $value = $request->file('thumbnail');
+            $extension = $value->extension();
+            $fileNames = 'file_' . uniqid('images_', microtime()) . '.' . $extension;
+            $value->move(public_path('images'), $fileNames);
+            // \Log::info('File uploaded:', ['filename' => $fileNames]);
+        }
 
         Berita::create([
             'judul' => $request->judul,
             'isi' => $request->isi,
+            'thumbnail' => $fileNames
         ]);
 
         return redirect()->route('berita.index')->with('success', 'Berita Berhasil Ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Request $request, $id)
     {
-        //
+        $item = Berita::findOrFail($id);
+
+        if ($request->hasFile('thumbnail')) {
+            $value = $request->file('thumbnail');
+            $extension = $value->extension();
+            $fileNames = 'file_' . uniqid('images_', microtime()) . '.' . $extension;
+            $value->move(public_path('images'), $fileNames);
+        }
+
+        return view('pages.berita.show', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -83,16 +102,29 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $request->validate([
+        //     'judul' => ['required', 'string', 'max:255'],
+        //     'isi' => ['required', 'string'],
+        //     'thumbnail' => ['nullable', 'mimes:png,jpg,jpeg,pdf', 'max:5124']
+        // ]);
+        // dd($request);
         $item = Berita::findOrFail($id);
 
-        $request->validate([
-            'judul' => ['required', 'string', 'max:255'],
-            'isi' => ['required', 'string']
-        ]);
+        if ($request->hasFile('thumbnail')) {
+            $value = $request->file('thumbnail');
+            $extension = $value->extension();
+            $fileNames = 'file' . uniqid('images_', microtime()) . '.' . $extension;
+            $value->move(public_path('images'), $fileNames);
+        } else {
+            $fileNames = $item->thumbnail;
+        }
+
 
         $item->update([
             'judul' => $request->judul,
             'isi' => $request->isi,
+            'thumbnail' => $fileNames
+
         ]);
 
         return redirect()->route('berita.index')->with('success', 'Berita Berhasil Diperbarui');

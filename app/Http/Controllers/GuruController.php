@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -16,7 +18,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $items = User::where('role', 'GURU')->get();
+        $items = Guru::all();
 
         return view('pages.guru.index', [
             'items' => $items
@@ -30,47 +32,36 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return view('pages.guru.create');
+        $user = Auth::user();
+        return view('pages.guru.profile', compact('user'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'email' => 'required|string|max:255|email|unique:users',
-            'name' => 'required|string|max:255',
-            'nipy' => 'required|string|max:15',
-            'jenis_kelamin' => 'required|string|max:10',
-            'no_hp' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()]
+            'nama' => 'required|string',
+            'nipy' => 'required|string',
+            'gender' => 'required|string',
+            'email' => 'required|email|unique:guru,email',
+            'no_hp' => 'required|string',
+            'alamat' => 'required|string',
         ]);
+        $user = Auth::user();
+        // dd($user);
+        // Simpan data guru ke dalam database dengan menggunakan user_id dari user yang sedang login
+        $guru = new Guru();
+        $guru->user_id = $user->id;
+        $guru->nama = $request->nama;
+        $guru->nipy = $request->nipy;
+        $guru->gender = $request->gender;
+        $guru->email = $request->email;
+        $guru->no_hp = $request->no_hp;
+        $guru->alamat = $request->alamat;
+        $guru->save();
 
-        User::create([
-            'name' => $request->name,
-            'role' => 'SISWA',
-            'nipy' => $request->nipy,
-            'jenis_kelamin' => $request->jk,
-            'email' => $request->email,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-            'password' => Hash::make($request->password)
-        ]);
-
-        return redirect()->route('guru.index')->with('success', 'Guru Berhasil Ditambahkan');
+        return redirect()->route('dashboard')->with('succes', 'Profile berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
@@ -103,7 +94,8 @@ class GuruController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'nipy' => 'required|string|max:15',
-            'jenis_kelamin' => 'required|string|max:10',
+            'gender' => 'required|string|max:10',
+            'email' => 'required|string|max:255|email|unique:users',
             'no_hp' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
         ]);
@@ -124,7 +116,7 @@ class GuruController extends Controller
 
         $user->name = $request->name;
         $user->nipy = $request->nipy;
-        $user->jk = $request->jk;
+        $user->gender = $request->gender;
         $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
         $user->email = $request->email;

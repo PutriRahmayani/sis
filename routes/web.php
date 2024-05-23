@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\AkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,32 +30,45 @@ use App\Http\Controllers\GuruController;
 // })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth', 'checkrole:ADMIN,GURU,SISWA'])
-->group(function() {
-    Route::resource('prestasi', PrestasiController::class);
-    // Route::get('/prestasi/cetak/{tglawal}/{tglakhir}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
+    ->group(function () {
+        Route::resource('prestasi', PrestasiController::class);
 
-    // Route::get('/cetak-laporan', [PrestasiController::class, 'laporan'])->name('prestasis.laporan');
+        // Route::get('/prestasi/cetak/{tglawal}/{tglakhir}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
 
-    Route::resource('berita', BeritaController::class);
+        // Route::get('/cetak-laporan', [PrestasiController::class, 'laporan'])->name('prestasis.laporan');
 
-    Route::resource('siswa', SiswaController::class);
-
-    Route::resource('guru', GuruController::class);
-});
+    });
 
 Route::middleware(['auth'])
-->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
-    Route::get('/kelola-prestasi', [PrestasiController::class, 'kelola'])->name('prestasi.kelola');
-    Route::post('/kelola-prestasi', [PrestasiController::class, 'store2'])->name('prestasi.store2');
-    Route::delete('/kelola-prestasi/{id}', [PrestasiController::class, 'destroy2'])->name('prestasi.destroy2');
-    Route::put('/kelola-prestasi/{id}', [PrestasiController::class, 'update2'])->name('prestasi.update2');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    ->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/siswa/profile', [SiswaController::class, 'create'])->name('profile.siswa');
+        Route::post('/siswa/update', [SiswaController::class, 'store'])->name('profile.store');
+        Route::get('/guru/profile', [GuruController::class, 'create'])->name('profile.guru');
+        Route::post('/guru/update', [GuruController::class, 'store'])->name('guru.profile.store');
+        Route::get('/cetak/prestasi', [PrestasiController::class, 'cetak']);
+        Route::post('/cetak/prestasi', [PrestasiController::class, 'cetak'])->name('cetak');
+    });
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-});
+Route::middleware(['auth', 'checkrole:ADMIN'])
+    ->group(function () {
+        Route::resource('akun', AkunController::class);
+        Route::resource('siswa', SiswaController::class);
+        Route::resource('guru', GuruController::class);
+        Route::resource('berita', BeritaController::class);
+        Route::post('/berita.store', [BeritaController::class, 'store'])->name('berita.store');
+        Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
+        Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
+        Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
+        Route::post('/akun/store', [AkunController::class, 'store'])->name('akun.store');
+        Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
+        Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
+        Route::get('/prestasi/cetak/{id}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
+    });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -63,4 +77,5 @@ Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.cre
 Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
 
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';

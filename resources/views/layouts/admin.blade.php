@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="icon" type="image/x-icon" href="{{ url('logo-pendidikan.png') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url('logo_smait.png') }}" />
 
     <title>Dashboard</title>
 
