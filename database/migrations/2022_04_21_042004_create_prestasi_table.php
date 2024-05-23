@@ -24,6 +24,7 @@ class CreatePrestasiTable extends Migration
             $table->string('tingkat');
             $table->string('keterangan');
             $table->string('bukti');
+            $table->enum('status', ['menunggu konfirmasi', 'disetujui'])->default('menunggu konfirmasi');
             $table->timestamps();
         });
     }

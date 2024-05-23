@@ -169,4 +169,20 @@ class PrestasiController extends Controller
 
         return view('pages.prestasi.cetak', compact('cetak', 'startDate', 'endDate'));
     }
+
+    public function updateStatus($id)
+    {
+        $prestasi = Prestasi::findOrFail($id);
+
+        // Toggle the status between 'menunggu konfirmasi' and 'disetujui'
+        if ($prestasi->status == 'menunggu konfirmasi') {
+            $prestasi->status = 'disetujui';
+        } else {
+            redirect()->back()->with('status', 'Prestasi sudah disetujui!');
+        }
+
+        $prestasi->save();
+
+        return redirect()->back()->with('status', 'Prestasi status updated successfully!');
+    }
 }

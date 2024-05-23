@@ -33,10 +33,6 @@ Route::middleware(['auth', 'checkrole:ADMIN,GURU,SISWA'])
     ->group(function () {
         Route::resource('prestasi', PrestasiController::class);
 
-        // Route::get('/prestasi/cetak/{tglawal}/{tglakhir}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
-
-        // Route::get('/cetak-laporan', [PrestasiController::class, 'laporan'])->name('prestasis.laporan');
-
     });
 
 Route::middleware(['auth'])
@@ -68,6 +64,8 @@ Route::middleware(['auth', 'checkrole:ADMIN'])
         Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
         Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
         Route::get('/prestasi/cetak/{id}', [PrestasiController::class, 'cetak'])->name('prestasi.cetak');
+
+    Route::patch('/prestasi/{id}/update-status', [PrestasiController::class, 'updateStatus'])->name('prestasi.updateStatus');
     });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
