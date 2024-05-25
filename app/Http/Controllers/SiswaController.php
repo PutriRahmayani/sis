@@ -33,9 +33,16 @@ class SiswaController extends Controller
      */
     public function create()
     {
+        // Retrieve the currently authenticated user
         $user = Auth::user();
-        return view('pages.siswa.profile', compact('user'));
+
+        // Find the Siswa record associated with the authenticated user
+        $siswa = Siswa::where('user_id', $user->id)->first();
+
+        // Pass the Siswa instance to the view
+        return view('pages.siswa.profile', compact('siswa'));
     }
+
     public function store(Request $request)
     {
         // dd($request);
@@ -74,7 +81,9 @@ class SiswaController extends Controller
         ]);
 
         // Cek apakah validasi gagal
-        // dd($validator);
+        // dd($request->all());
+        $user = Auth::user();
+        // dd($user->id);
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
@@ -83,8 +92,6 @@ class SiswaController extends Controller
 
         // Ambil user yang sedang login
 
-        $user = Auth::user();
-        dd($user);
         // Buat data siswa baru dengan data yang sudah divalidasi
         $siswa = new Siswa();
         $siswa->user_id = $user->id; // Ambil user_id dari user yang sedang login
@@ -130,41 +137,33 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'nisn' => 'required|string|max:15',
-            'gender' => 'required|string|max:10',
-            'email' => 'required|string|max:255|email|unique:users',
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'nisn' => 'required|string|max:255',
             'no_hp' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
+            'gender' => 'required|in:laki-laki,perempuan',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+        
+        $siswa = Siswa::findOrFail($id);
+
+        $siswa->update([
+            'nama' => $request->nama,
+            'nisn' => $request->nisn,
+            'gender' => $request->gender,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
         ]);
 
-        if ($request->password) {
-            $request->validate([
-                'password' => ['required', 'confirmed', Rules\Password::defaults()]
-            ]);
-        }
-
-        $user = User::findOrFail($id);
-
-        if ($request->email != $user->email) {
-            $request->validate([
-                'email' => 'required|string|max:255|email|unique:users',
-            ]);
-        }
-
-        $user->name = $request->name;
-        $user->nisn = $request->nisn;
-        $user->gender = $request->gender;
-        $user->email = $request->email;
-        $user->no_hp = $request->no_hp;
-        $user->alamat = $request->alamat;
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
-
-        return redirect()->route('siswa.index')->with('success', 'Siswa Berhasil Diperbarui');
+        return redirect()->back()->with('success', 'Siswa Berhasil Diperbarui');
     }
 
     /**

@@ -42,7 +42,8 @@ Route::middleware(['auth'])
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/siswa/profile', [SiswaController::class, 'create'])->name('profile.siswa');
-        Route::post('/siswa/update', [SiswaController::class, 'store'])->name('profile.store');
+        Route::post('/siswa/store', [SiswaController::class, 'store'])->name('profile.store');
+        Route::put('/profil_siswa/update/{id}', [SiswaController::class, 'update'])->name('profil_siswa.update');
         Route::get('/guru/profile', [GuruController::class, 'create'])->name('profile.guru');
         Route::post('/guru/update', [GuruController::class, 'store'])->name('guru.profile.store');
         Route::get('/cetak/prestasi', [PrestasiController::class, 'cetak']);

@@ -11,65 +11,64 @@
         </div>
     @endif
     
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-primary">
-                        <div class="card-body">
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-                                <a data-toggle="modal" data-target="#modal-tambah-siswa" class="btn btn-primary mb-3"><i class="fas fa-plus"></i></a>
-                                @includeIf('pages.siswa.create')
-                            </div>
-                            <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for='nama'>Nama</label>
-                                        <p class="form-control"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for='nisn'>NISN</label>
-                                        <p class="form-control"></p>
-                                    </div>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+                            <a data-toggle="modal" data-target="#modal-tambah-profile-siswa" class="btn btn-primary mb-3">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            @includeIf('pages.siswa.create_profile')
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for='nama'>Nama</label>
+                                    <p class="form-control">{{ $siswa->nama ?? '' }}</p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for='gender'>Jenis Kelamin</label>
-                                        <p class="form-control"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for='email'>Email</label>
-                                        <p class="form-control">{{ Auth::user()->email ?? '' }}</p>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for='nisn'>NISN</label>
+                                    <p class="form-control">{{ $siswa->nisn ?? '' }}</p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for='no_hp'>No HP</label>
-                                        <p class="form-control"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for='alamat'>Alamat</label>
-                                        <p class="form-control"></p>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for='gender'>Jenis Kelamin</label>
+                                    <p class="form-control">{{ $siswa->gender ?? '' }}</p>
                                 </div>
                             </div>
-                            </form>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for='email'>Email</label>
+                                    <p class="form-control">{{ $siswa->email ?? Auth::user()->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for='no_hp'>No HP</label>
+                                    <p class="form-control">{{ $siswa->no_hp ?? '' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for='alamat'>Alamat</label>
+                                    <p class="form-control">{{ $siswa->alamat ?? '' }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                </div>
             </div>
-        </section>
+            <div class="col-md-6"></div>
+        </div>
+    </section>
+</div>
 @endsection
