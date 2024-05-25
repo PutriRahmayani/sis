@@ -19,7 +19,7 @@
                                         <label for="judul">Judul</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                             id="judul" name="judul" placeholder="Masukkan Judul"
-                                            value="{{ old('judul') }}" required>
+                                            value="{{ old('judul', $item->judul) }}" required>
                                         @error('judul')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

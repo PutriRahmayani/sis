@@ -12,15 +12,54 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-body">
-                                <h3 class="text-center" style="color: black">{{ $item->nama }} </h3>
-                                <h4 class="text-center" style="color: black">{{ $item->email }} </h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for='nama'>Nama</label>
+                                            <p class="form-control">{{ $item->nama }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for='nisn'>NISN</label>
+                                            <p class="form-control">{{ $item->nisn }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for='gender'>Jenis Kelamin</label>
+                                            <p class="form-control">{{ ucfirst($item->gender) }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for='email'>Email</label>
+                                            <p class="form-control">{{ $item->email }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for='no_hp'>No HP</label>
+                                            <p class="form-control">{{ $item->no_hp }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for='alamat'>Alamat</label>
+                                            <p class="form-control">{{ $item->alamat }}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                     </div>
                 </div>
-
             </section>
         </div>
     </div>

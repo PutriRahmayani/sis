@@ -20,7 +20,7 @@
                                         <label for="nama">Nama</label>
                                         <input type="text" name="nama" id="nama"
                                             class="form-control @error('nama')  is-invalid  @enderror" placeholder="Masukkan Nama"
-                                            value="{{ $item->name }}" >
+                                            value="{{ old('nama', $item->nama) }}" >
                                         @error('nama')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <label for="tanggal">Tanggal</label>
                                         <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal"
-                                            name="tanggal" placeholder="Masukkan Tanggal" value="{{ old('tanggal') }}" required>
+                                            name="tanggal" placeholder="Masukkan Tanggal" value="{{ old('tanggal', $item->tanggal) }}" required>
                                         @error('tanggal')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
                                         <label for="lomba">Lomba</label>
                                         <input type="text" name="lomba" id="lomba"
                                             class="form-control @error('lomba')  is-invalid  @enderror" placeholder="Masukkan Lomba"
-                                            value="{{ old('lomba') }}" required>
+                                            value="{{ old('lomba', $item->lomba) }}" required>
                                         @error('lomba')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
                                         <label for="penyelenggara">Penyelenggara</label>
                                         <input type="text" name="penyelenggara" id="penyelenggara"
                                             class="form-control @error('penyelenggara')  is-invalid  @enderror"
-                                            placeholder="Masukkan Penyelenggara" value="{{ old('penyelenggara') }}" required>
+                                            placeholder="Masukkan Penyelenggara" value="{{ old('penyelenggara', $item->penyelenggara) }}" required>
                                         @error('penyelenggara')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -92,7 +92,7 @@
                                             <label for="penyelenggara">Keterangan</label>
                                             <input type="text" name="keterangan" id="keterangan"
                                                 class="form-control @error('keterangan')  is-invalid  @enderror"
-                                                placeholder="Masukkan Keterangan" value="{{ old('keterangan') }}" required>
+                                                placeholder="Masukkan Keterangan" value="{{ old('keterangan', $item->keterangan) }}" required>
                                             @error('keterangan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

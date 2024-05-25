@@ -18,7 +18,7 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for='name'>Nama</label>
-                    <input class='form-control @error('name') is-invalid @enderror' type='text' name='name' id='name' placeholder='Masukkan Nama' value='{{ old('name') }}' />
+                    <input class='form-control @error('name') is-invalid @enderror' type='text' name='name' id='name' placeholder='Masukkan Nama' value='{{ old('name', $item->name) }}' />
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for='nipy'>NIPY</label>
-                    <input class='form-control @error('nipy') is-invalid @enderror' type='text' name='nipy' id='nipy' placeholder='Masukkan NIPY' value='{{ old('nipy') }}' />
+                    <input class='form-control @error('nipy') is-invalid @enderror' type='text' name='nipy' id='nipy' placeholder='Masukkan NIPY' value='{{ old('nipy', $item->nipy) }}' />
                     @error('nipy')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group">
                     <label for='email'>Email</label>
-                    <input class='form-control @error('email') is-invalid @enderror' type='email' name='email' id='email' placeholder='Masukkan Email' value='{{ old('email') }}' />
+                    <input class='form-control @error('email') is-invalid @enderror' type='email' name='email' id='email' placeholder='Masukkan Email' value='{{ old('email', $item->email) }}'/>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for='no_hp'>No HP</label>
-                    <input class='form-control @error('no_hp') is-invalid @enderror' type='text' name='no_hp' id='no_hp' placeholder='Masukkan No HP' value='{{ old('no_hp') }}' />
+                    <input class='form-control @error('no_hp') is-invalid @enderror' type='text' name='no_hp' id='no_hp' placeholder='Masukkan No HP' value='{{ old('no_hp', $item->no_hp) }}' />
                     @error('no_hp')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group">
                     <label for='alamat'>Alamat</label>
-                    <input class='form-control @error('alamat') is-invalid @enderror' type='text' name='alamat' id='alamat' placeholder='Masukkan Alamat' value='{{ old('alamat') }}' />
+                    <input class='form-control @error('alamat') is-invalid @enderror' type='text' name='alamat' id='alamat' placeholder='Masukkan Alamat' value='{{ old('alamat', $item->alamat) }}' />
                     @error('alamat')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

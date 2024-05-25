@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,8 @@ class CreateGuruTable extends Migration
     {
         Schema::create('guru', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
+            // $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('nama');
             $table->string('nipy');
             $table->enum('gender', ['laki-laki', 'perempuan']);

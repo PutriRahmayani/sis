@@ -44,9 +44,9 @@ class ProfileController extends Controller
         if ($request->avatar) {
             $value = $request->file('avatar');
             $extension = $value->extension();
-            $fileNames = 'avatar-' . uniqid('img_', microtime()) . '.' . $extension;
-            Storage::putFileAs('public/file-avatar', $value, $fileNames);
-        }else{
+            $fileNames = 'avatar_' . uniqid('img_', microtime()) . '.' . $extension;
+            $value->move(public_path('images/avatar'), $fileNames);
+        } else {
             $fileNames = $item->avatar;
         }
 
@@ -96,8 +96,8 @@ class ProfileController extends Controller
             $value = $request->file('avatar');
             $extension = $value->extension();
             $fileNames = 'avatar-' . uniqid('img_', microtime()) . '.' . $extension;
-            Storage::putFileAs('public/file-avatar', $value, $fileNames);
-        }else{
+            $value->move(public_path('images/avatar'), $fileNames);
+        } else {
             $fileNames = $item->avatar;
         }
 
@@ -112,5 +112,4 @@ class ProfileController extends Controller
 
         return redirect()->route('dashboard');
     }
-
 }

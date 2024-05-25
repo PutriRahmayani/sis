@@ -12,17 +12,19 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-body">
-                                <h3 class="text-center" style="color: black">{{ $item->nama }} </h3>
-                                <h4 class="text-center" style="color: black">{{ $item->prestasi }} </h4>
-                                <embed src="{{ asset('storage/app/public/file-images/' . $item->bukti) }}" width="100%"
-                                    height="1000" />
+                                <h3 class="text-center" style="color: black">{{ $item->nama }}</h3>
+                                <h4 class="text-center" style="color: black">{{ $item->prestasi }}</h4>
+                                <p class="text-center" style="color: black">Tanggal: {{ $item->tanggal }}</p>
+                                <p class="text-center" style="color: black">Lomba: {{ $item->lomba }}</p>
+                                <p class="text-center" style="color: black">Penyelenggara: {{ $item->penyelenggara }}</p>
+                                <p class="text-center" style="color: black">Tingkat: {{ $item->tingkat }}</p>
+                                <p class="text-center" style="color: black">Keterangan: {{ $item->keterangan }}</p>
+                                <img src="{{ asset('images/buktiindex/' . $item->bukti) }}" width="100%" height="1000" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                    </div>
+                    <div class="col-md-6"></div>
                 </div>
-
             </section>
         </div>
     </div>

@@ -16,7 +16,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama" value="{{ $user->name }}" readonly>
+                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama" value="{{old('nama', $user->name)}}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="nipy">NIPY</label>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ $user->email }}" readonly>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{old('email', $user->email)}}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="no_hp">No HP</label>

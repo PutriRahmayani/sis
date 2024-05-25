@@ -65,7 +65,7 @@
     <li class="nav-item @if (Route::is('profile.*')) active @endif">
         <a class="nav-link" href="{{ route('profile.siswa') }}">
             <i class="fas fa-fw fa-trophy"></i>
-            <span>Profile</span></a>
+            <span>Data Siswa</span></a>
     </li>
 
 @elseif(Auth::user()->role == 'GURU')
@@ -78,7 +78,7 @@
     <li class="nav-item @if (Route::is('profile.*')) active @endif">
         <a class="nav-link" href="{{ route('profile.guru') }}">
             <i class="fas fa-fw fa-trophy"></i>
-            <span>Profile</span></a>
+            <span>Data Guru</span></a>
     </li>
 @endif
 

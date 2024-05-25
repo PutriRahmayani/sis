@@ -10,46 +10,66 @@
             </button>
         </div>
     @endif
-    <div class="card mb-5">
-        <div class="card-body">
-            <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama" value="{{ $user->name }}" readonly>
+    
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+                                <a data-toggle="modal" data-target="#modal-tambah-siswa" class="btn btn-primary mb-3"><i class="fas fa-plus"></i></a>
+                                @includeIf('pages.siswa.create')
+                            </div>
+                            <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for='nama'>Nama</label>
+                                        <p class="form-control"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for='nisn'>NISN</label>
+                                        <p class="form-control"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for='gender'>Jenis Kelamin</label>
+                                        <p class="form-control"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for='email'>Email</label>
+                                        <p class="form-control">{{ Auth::user()->email ?? '' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for='no_hp'>No HP</label>
+                                        <p class="form-control"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for='alamat'>Alamat</label>
+                                        <p class="form-control"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="nisn">NISN</label>
-                    <input type="text" name="nisn" id="nisn" class="form-control" placeholder="NISN">
+                <div class="col-md-6">
                 </div>
-                <div class="form-group">
-                    <label for="gender">Jenis Kelamin</label>
-                    <select name="gender" id="gender" class="form-control" required>
-                        <option value="">Pilih Gender</option>
-                        <option value="perempuan" @if (old('gender') == 'perempuan') selected @endif>Perempuan</option>
-                        <option value="laki-laki" @if (old('gender') == 'laki-laki') selected @endif>Laki-laki</option>
-                    </select>
-                    @error('gender')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ $user->email }}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="no_hp">No HP</label>
-                    <input type="text" name="no_hp" id="no_hp" class="form-control" placeholder="No HP">
-                </div>
-                <div class="form-group">
-                    <label for="alamat">Alamat</label>
-                    <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat">
-                </div>  
-                <button type="submit" class="btn btn-primary btn-block mt-3">Simpan</button>
-            </form>
-        </div>
-    </div>
-</div>
+            </div>
+        </section>
 @endsection

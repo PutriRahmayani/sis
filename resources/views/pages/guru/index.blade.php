@@ -15,15 +15,9 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-3 text-gray-800 font-weight-bold">Manajemen Guru</h1>
-    {{--  <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p>  --}}
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        {{--  <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>  --}}
         <div class="card-body">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
                 {{-- <a data-toggle="modal" data-target="#modal-tambah-guru" class="btn btn-primary mb-3">Tambah Guru</a> --}}
@@ -58,8 +52,8 @@
                                     class="btn btn-success"><i class='fas fa-eye'></i></a>
                                 {{-- <a data-toggle="modal" data-target="#modal-edit-guru{{ $item->id }}"
                                     class="btn btn-primary"><i class="fas fa-pen"></i></a> --}}
-                                <a data-toggle="modal" data-target="#modal-hapus-guru{{ $item->id }}"
-                                    class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                {{-- <a data-toggle="modal" data-target="#modal-hapus-guru{{ $item->id }}"
+                                    class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
                             </td>
                         </tr>
                         @includeIf('pages.guru.show')
@@ -72,8 +66,8 @@
                         @endforelse
                     </tbody>
                 </table>
-                <a data-toggle="modal" data-target="#modal-cetak-prestasi" class="btn btn-primary mb-3">
-                    <i class="fa fa-print d-block"></i>Cetak Data</a>
+                {{-- <a data-toggle="modal" data-target="#modal-cetak-prestasi" class="btn btn-primary mb-3">
+                    <i class="fa fa-print d-block"></i>Cetak Data</a> --}}
             </div>
         </div>
     </div>
@@ -82,7 +76,7 @@
 <!-- /.container-fluid -->
 
 <!-- Modal Hapus Guru -->
-@foreach ($items as $item)
+{{-- @foreach ($items as $item)
 <div class="modal fade" id="modal-hapus-guru{{ $item->id }}">
     <div class="modal-dialog">
         <div class="modal-content bg-danger text-white">
@@ -105,6 +99,6 @@
         </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
 
 @endsection

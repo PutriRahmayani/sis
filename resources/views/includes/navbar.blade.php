@@ -30,7 +30,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 @if (Auth::user()->avatar != null)
-                    <img src="{{ asset('storage/file-avatar/' . Auth::user()->avatar) }}" alt="" srcset=""
+                    <img src="{{ asset('/images/avatar/' . Auth::user()->avatar) }}" alt="" srcset=""
                         class="rounded-circle" width="25">
                     <span class="ml-2 mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                 @else

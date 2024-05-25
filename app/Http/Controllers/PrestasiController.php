@@ -13,10 +13,10 @@ class PrestasiController extends Controller
 {
     public function index()
     {
-        // $items = Prestasi::orderBy('tanggal', 'DESC')->get();
-        // return view('pages.prestasi.index', [
-        //     'items' => $items
-        // ]);
+        $items = Prestasi::orderBy('tanggal', 'DESC')->get();
+        return view('pages.prestasi.index', [
+            'items' => $items
+        ]);
 
         $items = Prestasi::all();
         $lombaList = Prestasi::select('lomba')->distinct()->pluck('lomba');
@@ -24,14 +24,13 @@ class PrestasiController extends Controller
         return view('pages.prestasi.index', compact('items', 'lombaList'));
     }
 
-    public function kelola()
-    {
-        $items = Prestasi::where('user_id', Auth::user()->id)->get();
-        return view('pages.prestasi.index', [
-            'items' => $items
-        ]);
-    }
-
+    // public function kelola()
+    // {
+    // $items = Prestasi::where('user_id', Auth::user()->id->get();
+    // return view('pages.prestasi.index', [
+    //     'items' => $items
+    // ]);
+    // }
     public function create()
     {
         //
@@ -53,7 +52,8 @@ class PrestasiController extends Controller
         $value = $request->file('bukti');
         $extension = $value->extension();
         $fileNames = 'file' . uniqid('image_', microtime()) . '.' . $extension;
-        Storage::putFileAs('public/file-images', $value, $fileNames);
+        // Storage::putFileAs('public/file-images', $value, $fileNames);
+        $value->move(public_path('images/buktiindex'), $fileNames);
 
         Prestasi::create([
             'user_id' => Auth::user()->id,
@@ -74,20 +74,19 @@ class PrestasiController extends Controller
     {
         $item = Prestasi::findOrFail($id);
 
-        if ($request->bukti) {
-            $value = $request->file('bukti');
-            $extension = $value->extension();
-            $fileNames = 'file' . uniqid('pdf_', microtime()) . '.' . $extension;
-            Storage::putFileAs('public/file-pdf', $value, $fileNames);
-        } else {
-            $fileNames = $item->bukti;
-        }
+        // if ($request->bukti) {
+        //     $value = $request->file('bukti');
+        //     $extension = $value->extension();
+        //     $fileNames = 'file' . uniqid('pdf_', microtime()) . '.' . $extension;
+        //     Storage::putFileAs('public/file-pdf', $value, $fileNames);
+        // } else {
+        //     $fileNames = $item->bukti;
+        // }
 
         return view('pages.prestasi.show', [
             'item' => $item
         ]);
     }
-
 
     public function edit($id)
     {
@@ -108,15 +107,11 @@ class PrestasiController extends Controller
         ]);
 
         $item = Prestasi::findOrFail($id);
-
-        if ($request->bukti) {
-            $value = $request->file('bukti');
-            $extension = $value->extension();
-            $fileNames = 'file' . uniqid('pdf_', microtime()) . '.' . $extension;
-            Storage::putFileAs('public/file-pdf', $value, $fileNames);
-        } else {
-            $fileNames = $item->bukti;
-        }
+        $value = $request->file('bukti');
+        $extension = $value->extension();
+        $fileNames = 'file' . uniqid('image_', microtime()) . '.' . $extension;
+        // Storage::putFileAs('public/file-images', $value, $fileNames);
+        $value->move(public_path('images/buktiindex'), $fileNames);
 
         $item->update([
             'nama' => $request->nama,
@@ -141,19 +136,6 @@ class PrestasiController extends Controller
         return redirect()->route('prestasi.index')->with('success', 'Berhasil Menghapus Prestasi');
     }
 
-    // public function cetak(Request $request)
-    // {
-
-    //     // $cetak = Prestasi::all();
-
-    //     // return view('pages.prestasi.cetak', compact('cetak'));
-    //     $lomba = $request->input('lomba');
-    //     // $prestasi = Prestasi::where('lomba', $lomba)->get();
-
-    //     // // Logika untuk mencetak atau menampilkan data prestasi berdasarkan lomba yang dipilih
-    //     // // Misalnya, mengarahkan ke view khusus untuk cetak
-    //     // return view('pages.prestasi.cetak', compact('prestasi'));
-    // }
     public function cetak(Request $request)
     {
         $request->validate([
@@ -178,11 +160,11 @@ class PrestasiController extends Controller
         if ($prestasi->status == 'menunggu konfirmasi') {
             $prestasi->status = 'disetujui';
         } else {
-            redirect()->back()->with('status', 'Prestasi sudah disetujui!');
+            redirect()->back()->with('status', 'Prestasi Berhasil Disetujui!');
         }
 
         $prestasi->save();
 
-        return redirect()->back()->with('status', 'Prestasi status updated successfully!');
+        return redirect()->back()->with('status', 'Status Prestasi Berhasil Diperbarui!');
     }
 }

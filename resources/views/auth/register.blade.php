@@ -26,19 +26,6 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            {{-- <!-- Role -->
-            <div class="mt-4">
-                <x-label for="role" :value="__('Role')" />
-
-                <select id="role" name="role" class="block mt-1 w-full" required>
-                    <option value="">{{ __('Select Role') }}</option>
-                    <option value="admin">{{ __('Admin') }}</option>
-                    <option value="siswa">{{ __('Siswa') }}</option>
-                    <option value="guru">{{ __('Guru') }}</option>
-                    <!-- Tambahkan opsi role lainnya di sini -->
-                </select>
-            </div> --}}
-
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />

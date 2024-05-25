@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="icon" type="image/x-icon" href="{{ url('logo-pendidikan.png') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ url('logo_smait.png') }}" />
         <title>SMA IT IQRA' Kota Bengkulu</title>
 
         <!-- Fonts -->

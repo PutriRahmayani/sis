@@ -53,7 +53,6 @@ class BeritaController extends Controller
             $extension = $value->extension();
             $fileNames = 'file_' . uniqid('images_', microtime()) . '.' . $extension;
             $value->move(public_path('images'), $fileNames);
-            // \Log::info('File uploaded:', ['filename' => $fileNames]);
         }
 
         Berita::create([

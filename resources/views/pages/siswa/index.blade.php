@@ -55,16 +55,14 @@
                             </tr>
                             @includeIf('pages.siswa.show', ['item' => $item])
                             {{-- @includeIf('pages.siswa.edit', ['item' => $item]) --}}
-                            {{-- @includeIf('pages.siswa.cetak', ['item' =. $item]) --}}
+                            
                         @empty
-                            <tr>
-                                <td colspan="8" class="text-center">Data tidak tersedia</td>
-                            </tr>
+                        {{-- handle data empty --}}
                         @endforelse
                     </tbody>
                 </table>
-                <a data-toggle="modal" data-target="#modal-cetak-prestasi" class="btn btn-primary mb-3">
-                    <i class="fa fa-print d-block"></i>Cetak Data</a>
+                {{-- <a data-toggle="modal" data-target="#modal-cetak-prestasi" class="btn btn-primary mb-3">
+                    <i class="fa fa-print d-block"></i>Cetak Data</a> --}}
             </div>
         </div>
     </div>

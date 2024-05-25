@@ -77,45 +77,58 @@
       </div>
     </section>
 
-   
     <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Berita</h2>
-        </div>
-
-        <div class="row justify-content-center">
-            @foreach ($berita as $item)
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in">
-                <div class="icon-box">
-                  <h4>{{ $item->judul }}</h4>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalberita{{ $item->id }}">
-                    Lihat Berita
-                  </button>
-                </div>
-              </div>
-            @endforeach
-        </div>
-      </div>
-    </section>
-    @foreach ($berita as $item2)
-    <div class="modal fade" id="modalberita{{ $item2->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">{{ $item2->judul }}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              {!! $item2->isi !!}
-            </div>
+          <div class="section-title">
+              <h2>Berita</h2>
           </div>
-        </div>
+          <div class="row justify-content-center">
+              @foreach ($berita as $item)
+              <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in">
+                  <div class="icon-box d-flex flex-column justify-content-between">
+                      <!-- Menampilkan Thumbnail dan Judul -->
+                      <div class="text-center mb-2">
+                          <img src="/images/{{$item->thumbnail }}" alt="Thumbnail" class="img-fluid mx-auto" style="max-width: 60%;">
+                          <h4 class="text-center">{{ $item->judul }}</h4>
+                      </div>
+                      <!-- Tombol "Lihat Berita" -->
+                      <div>
+                          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalberita{{ $item->id }}">
+                              Lihat Berita
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              @endforeach
+          </div>
       </div>
-    @endforeach
+  </section>
+  
+  @foreach ($berita as $item2)
+  <div class="modal fade" id="modalberita{{ $item2->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">{{ $item2->judul }}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  {{-- <div class="text-center mb-3">
+                      <img src="/images/{{$item2->thumbnail }}" alt="Thumbnail" class="img-fluid" style="max-width: 10%;">
+                  </div> --}}
+                  {!! $item2->isi !!}
+              </div>
+          </div>
+      </div>
+  </div>
+  @endforeach
+  
+
+  
+  
+  
 
 
     <!-- ======= Why Us Section ======= -->

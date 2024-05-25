@@ -9,7 +9,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form untuk menambahkan data siswa -->
             <form action="{{ route('siswa.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
